@@ -16,7 +16,7 @@ Restoring a snapshot to a serverless namespace replaces the database with the da
 
 This process helps in automating the process and giving flexibility of storing snapshot more than 24 hours.
 
-## Policy to be created 
+### Policy to be created 
 Name - redshift-serverless-snapshot-automation-policy
 
 ```
@@ -61,13 +61,13 @@ Name - redshift-serverless-snapshot-automation-policy
 }
 ```
 
-## Role to be created
+### Role to be created
 Name - redshift-serverless-snapshot-automation-role 
 ```
 Attached the above created policy to this role
 ```
 
-## Lambda function
+### Lambda function
 ```
 import json
 import boto3
@@ -106,18 +106,18 @@ def lambda_handler(event, context):
     return status
 ```
 
-## Attach role
+#### Attach role
 ```
 Attach above created role to the lambda function created redshift-serverless-snapshot-automation-role
 ```
 
-## Add BOTO3 Layer
+#### Add BOTO3 Layer
 ```
 Attach latest boto3 package as layer
 ```
 
-## Environment variables
+#### Environment variables
 ![image](https://user-images.githubusercontent.com/28712961/192637887-78e7a50a-0b49-421f-95cd-4c78845e850d.png)
  
-## Event Bridge
+### Event Bridge
 You can start an automation by specifying a runbook as the target of an Amazon EventBridge event. You can start automations according to a schedule, or when a specific AWS system event occurs.
