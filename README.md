@@ -1,13 +1,13 @@
 # Table of Contents
-[Redshift serverless snapshot automation](#Redshift-serverless-snapshot-automation)
-- [Policy to be created](#Policy-to-be-created)
-- [Role to be created](#Role-to-be-created)
-- [Lambda function](#Lambda-function)
-	- [Attach role](#Attach-role)
-	- [Add BOTO3 Layer](#Add-BOTO3-Layer)
-	- [Environment variables](#Environment-variables)
-- [Event Bridge](#Event-Bridge)
-- [Cloud Formation](#Cloud-Formation)
+- [Redshift serverless snapshot automation](#Redshift-serverless-snapshot-automation)
+	- [Policy to be created](#Policy-to-be-created)
+	- [Role to be created](#Role-to-be-created)
+	- [Lambda function](#Lambda-function)
+		- [Attach role](#Attach-role)
+		- [Add BOTO3 Layer](#Add-BOTO3-Layer)
+		- [Environment variables](#Environment-variables)
+	- [Event Bridge](#Event-Bridge)
+	- [Cloud Formation](#Cloud-Formation)
 
 ## Redshift serverless snapshot automation
 This process can be used to automate the Redshift serverless snapshot automation. 
