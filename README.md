@@ -121,10 +121,3 @@ Attach latest boto3 package as layer
  
 ## Event Bridge
 You can start an automation by specifying a runbook as the target of an Amazon EventBridge event. You can start automations according to a schedule, or when a specific AWS system event occurs.
-
-
-Click on below **Launch Button** to launch the Cloud Formation:
-https://docs.amazonaws.cn/en_us/eventbridge/latest/userguide/eb-run-lambda-schedule.html#eb-schedule-create-rule
-
-[<img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png" target=\”_blank\”>](https://github.com/riteshksinha/aws/blob/main/redshiftServerlessSnapshotAutomation.YAML
-)
