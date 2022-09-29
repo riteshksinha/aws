@@ -1,0 +1,44 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "redshift:GetClusterCredentials",
+            "Resource": [
+                "arn:aws:redshift:us-east-1:XXXXXXXXXXXX:dbname:redshift-cluster-1/dev",
+                "arn:aws:redshift:us-east-1:XXXXXXXXXXXX:dbuser:redshift-cluster-1/awsuser",
+                "arn:aws:redshift:us-east-1:XXXXXXXXXXXX:cluster:redshift-cluster-1*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": "redshift-data:ExecuteStatement",
+            "Resource": [
+                "arn:aws:redshift:us-east-1:XXXXXXXXXXXX:cluster:redshift-cluster-1*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:*",
+                "logs:*",
+                "s3:Get*",
+                "s3:List*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor3",
+            "Effect": "Allow",
+            "Action": [
+                "redshift-data:GetStatementResult",
+                "redshift-data:DescribeStatement",
+                "redshift-data:ListStatements"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
