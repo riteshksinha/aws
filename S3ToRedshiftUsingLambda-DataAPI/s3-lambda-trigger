@@ -1,0 +1,57 @@
+import json
+import urllib.parse
+import boto3
+import os
+import time
+
+
+s3 = boto3.client('s3')
+redshift_client = boto3.client("redshift-data")
+redshift_schema = os.environ['redshift_schema']
+redshift_database = os.environ['redshift_database']
+redshift_cluster_id = os.environ['redshift_cluster_id']
+redshift_user = os.environ['redshift_user']
+copy_iam_role = os.environ['copy_iam_role']
+
+copy_redshift_table_name = 'employee'                                           ##Hardcoded as of now
+    
+def lambda_handler(event, context):
+
+    # Get the object from the event and show its content type
+    bucket = event['Records'][0]['s3']['bucket']['name']
+    key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'], encoding='utf-8')
+
+    s3_file_path_prefix ='s3://' + bucket + '/' + key
+    attempts = 0
+    
+    print(bucket)
+    print(key)
+    try:
+        response = s3.get_object(Bucket=bucket, Key=key)
+        
+        sql_copy_command = 'COPY '
+        sql_copy_command = sql_copy_command + redshift_schema + "." + copy_redshift_table_name +" FROM \'" +s3_file_path_prefix
+        sql_copy_command = sql_copy_command + "\' iam_role '" + copy_iam_role +"' " + "csv " + " ignoreheader as 1"
+        
+        res = redshift_client.execute_statement(Database=redshift_database, DbUser=redshift_user,Sql=sql_copy_command, ClusterIdentifier=redshift_cluster_id)
+        query_id = res["Id"]
+        desc = redshift_client.describe_statement(Id=query_id)
+        query_status = desc["Status"]
+        done = False
+        
+        while not done:
+            time.sleep(5)
+            desc = redshift_client.describe_statement(Id=query_id)
+            query_status = desc["Status"]
+            if query_status == "FINISHED":
+                sql_copy_command='call public.populate_final_tables()'
+                redshift_client.execute_statement(Database=redshift_database, DbUser=redshift_user,Sql=sql_copy_command, ClusterIdentifier=redshift_cluster_id)
+                done = True
+      
+        return {'statusCode': 200, 'queryId': query_id}
+
+    except Exception as e:
+        print(e)
+        print('Error getting object {} from bucket {}. Make sure they exist and your bucket is in the same region as this function.'.format(key, bucket))
+        raise e
+              
