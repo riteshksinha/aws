@@ -7,6 +7,7 @@
 - Redshift Cluster
 
 # Create lambda function
+```
 import json
 import urllib.parse
 import boto3
@@ -63,7 +64,7 @@ def lambda_handler(event, context):
         print(e)
         print('Error getting object {} from bucket {}. Make sure they exist and your bucket is in the same region as this function.'.format(key, bucket))
         raise e
-              
+```             
 
 ## Make sure to use the policy created
 ```
