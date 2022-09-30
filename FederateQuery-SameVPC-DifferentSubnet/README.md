@@ -6,6 +6,7 @@
 - S3 bucket to hold the source file
 
 ### Policy/Role
+
 #### Glue Crawler Policy/Role
 Use the below AWS managed policy 
 ```
@@ -17,6 +18,8 @@ Follow the below link and create a secret for RDS instance
 
 #### Redshift
 Make sure that Redshift has access to Glue and S3, and attach below policy to Redshift
+
+#### Security Group
 
 https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
 
